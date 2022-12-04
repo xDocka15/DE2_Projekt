@@ -3,7 +3,7 @@
 ### Team members
 
 * Tomáš Dočkal (responsible for Code for Menu and Timer fucstions)
-* Tran Minh Hieu (responsible for Code for Menu, Timer and Ttopwatch functions)
+* Tran Minh Hieu (responsible for Code for Menu, Timer and Stopwatch functions)
 
 ## Hardware description
 
