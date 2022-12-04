@@ -16,7 +16,9 @@ Enables you to choose between stopwatch which counts up to each second up to 100
 ## Software description
 
 Put flowchats of your algorithm(s). Write descriptive text of your libraries and source files. Put direct links to these files in `src` or `lib` folders.
-
+ ![flowchart](TIMER1_flowchart.png)
+ ![flowchart](TIMER2_flowchart.png)
+ ![flowchart](VECT_flowchart.png)
 ## Video
 
 Insert a link to a short video with your practical implementation example (1-3 minutes, e.g. on YouTube).
