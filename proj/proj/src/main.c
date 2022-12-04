@@ -233,8 +233,7 @@ ISR(TIMER2_OVF_vect)
     }
 }
 
-ISR(TIMER1_OVF_vect)
-{
+ISR(TIMER1_OVF_vect){
 char string[8];
 static uint8_t no_of_overflows = 0;  
 
@@ -243,61 +242,61 @@ if (no_of_overflows >= 4){
   no_of_overflows = 0;
   if (start > 0){
     if (start == 1){ // stopwatch incrementing time
-      s++;
-      if (s >= 60){
-        s = 0;
-        m++;
-        if (m >= 60)
-        {
-          m = 0;
-          h++;
+        s++;
+        if (s >= 60){
+          s = 0;
+          m++;
+          if (m >= 60)
+          {
+            m = 0;
+            h++;
+          }
         }
-      }
-    } else if (s > 0 | m > 0 | h > 0){ // timer decremnets time 
-      s--;
-      if (s == -1){
-        s = 59;
-        m--;
-        if (m == -1)
-        {
-          m = 59;
-          h--;
+      } else if (s > 0 | m > 0 | h > 0){ // timer decrements time 
+        s--;
+        if (s == -1){
+          s = 59;
+          m--;
+          if (m == -1)
+          {
+            m = 59;
+            h--;
+          }
         }
+      } else { // if time is zero stop timer 
+        start = 0;
+        lcd_gotoxy(11,1);
+        lcd_puts(" stop");
+        GPIO_write_high(&PORTD, PD2);
       }
-    } else { // if time is zero stop timer 
-      start = 0;
-      lcd_gotoxy(11,1);
-      lcd_puts(" stop");
-      GPIO_write_high(&PORTD, PD2);
+    }
+    // code to display current timer to lcd
+    itoa(h, string, 10);
+    lcd_gotoxy(0,1);
+    if (h <= 9){
+      lcd_puts("0");
+      lcd_puts(string);
+    } else {
+      lcd_puts(string);
+    }
+    lcd_puts(":");
+    itoa(m, string, 10);
+    if (m <= 9){
+      lcd_puts("0");
+      lcd_puts(string);
+    } else {
+      lcd_puts(string);
+    }
+    lcd_puts(":");
+    itoa(s, string, 10);
+    if (s <= 9){
+      lcd_puts("0");
+      lcd_puts(string);
+    } else {
+      lcd_puts(string);
     }
   }
-  // code to display current timer to lcd
-  itoa(h, string, 10);
-  lcd_gotoxy(0,1);
-  if (h <= 9){
-    lcd_puts("0");
-    lcd_puts(string);
-  } else {
-    lcd_puts(string);
-  }
-  lcd_puts(":");
-  itoa(m, string, 10);
-  if (m <= 9){
-    lcd_puts("0");
-    lcd_puts(string);
-  } else {
-    lcd_puts(string);
-  }
-  lcd_puts(":");
-  itoa(s, string, 10);
-  if (s <= 9){
-    lcd_puts("0");
-    lcd_puts(string);
-  } else {
-    lcd_puts(string);
-  }
-  }
-  if (menu == 2 & ValueY > 900 & ValueX > 400 & ValueX < 600 & start == 0){ // if joystick is on right cycle timepos to right
+  if (menu == 2 & ValueY > 900 & ValueX > 400 & ValueX < 600 & start == 0){ // if joystick is on left cycle timepos to left
     switch (timepos)
     {
     case 0:
@@ -317,7 +316,7 @@ if (no_of_overflows >= 4){
       break;
     }
   }
-  if (menu == 2 & ValueY < 200 & ValueX > 400 & ValueX < 600 & start == 0){ // if joystick is on left cycle timepos to left
+  if (menu == 2 & ValueY < 200 & ValueX > 400 & ValueX < 600 & start == 0){ // if joystick is on right cycle timepos to right
     switch (timepos)
     {
     case 0:
