@@ -41,15 +41,15 @@
  *           Timer/Counter2 overflows.
  * Returns:  none
  **********************************************************************/
-uint8_t i = 0;
-uint16_t ValueX = 0;
-uint16_t ValueY = 0;
-uint8_t start = 0;
-int8_t s = 0;
-int8_t m = 0;
-int8_t h = 0;
-uint8_t timepos = 0;
-uint8_t menu = 0;
+uint8_t i = 0;  // poiter to which joystick axis we read
+uint16_t ValueX = 0; // value of the axi x
+uint16_t ValueY = 0; // value of the axi y
+uint8_t start = 0; // 0 timer/stopwatch turn off, 1 stopwatch turn on , 2 timer turn on  
+int8_t s = 0; // seconds
+int8_t m = 0; // minutes
+int8_t h = 0; // hours
+uint8_t timepos = 0; // 0 changing sec, 1 changing min, 2 changing hours,
+uint8_t menu = 0; // indicates what menu we are in
 int main(void)
 {
 
@@ -57,13 +57,12 @@ int main(void)
   // Initialize UART to asynchronous, 8N1, 9600
   uart_init(UART_BAUD_SELECT(9600, F_CPU));
     
-    lcd_init(LCD_DISP_ON);
-
-    
-    lcd_home();
-    lcd_puts(">Stopwatch");
-    lcd_gotoxy(0,1);
-    lcd_puts(" Timer");
+  // int dips and set default menu
+  lcd_init(LCD_DISP_ON);
+  lcd_home();
+  lcd_puts(">Stopwatch");
+  lcd_gotoxy(0,1);
+  lcd_puts(" Timer");
 
     
 //
@@ -77,14 +76,12 @@ int main(void)
 
 
     
-//
-    // Configuration of 8-bit Timer/Counter2 for Stopwatch update
-    // Set the overflow prescaler to 16 ms and enable interrupt
-    TIM2_overflow_16us();
-    TIM2_overflow_interrupt_enable();
+// int timers
+TIM2_overflow_16us();
+TIM2_overflow_interrupt_enable();
 
-    TIM1_overflow_262ms();
-    TIM1_overflow_interrupt_enable();
+TIM1_overflow_262ms();
+TIM1_overflow_interrupt_enable();
 
 
  // Configure Analog-to-Digital Convertion unit
@@ -133,6 +130,7 @@ ISR(TIMER2_OVF_vect)
     if (no_of_overflows >= 2)
     {
       no_of_overflows = 0;
+      // changing pos of ">"
       astate = GPIO_read(&PINB, PB3);
       if ((astate != alaststate) & (menu == 0))
       {
@@ -188,14 +186,14 @@ ISR(TIMER2_OVF_vect)
         lcd_puts(">Stopwatch");
         lcd_gotoxy(0,1);
         lcd_puts(" Timer");
-
         uart_puts("return\r\n");
 
+        GPIO_write_high(&PORTD, PD2);
         s = 0;
         m = 0;
         h = 0;
       }
-      else if (menu == 1 & GPIO_read(&PINB, PB5) == 0)
+      else if (menu == 1 & GPIO_read(&PINB, PB5) == 0) // starting/stoping stopwatch
       {
         if (start == 0)
         {
@@ -211,7 +209,7 @@ ISR(TIMER2_OVF_vect)
         }
         
       }
-      else if (menu == 2 & GPIO_read(&PINB, PB5) == 0)
+      else if (menu == 2 & GPIO_read(&PINB, PB5) == 0) // starting/stoping stopwatch
       {
         if (start == 0)
         {
@@ -230,7 +228,7 @@ ISR(TIMER2_OVF_vect)
         
       }
     }
-    while (GPIO_read(&PINB, PB4) == 0 | GPIO_read(&PINB, PB5) == 0){
+    while (GPIO_read(&PINB, PB4) == 0 | GPIO_read(&PINB, PB5) == 0){ // for joystick or encoder button to be released
     
     }
 }
@@ -244,7 +242,7 @@ no_of_overflows++;
 if (no_of_overflows >= 4){
   no_of_overflows = 0;
   if (start > 0){
-    if (start == 1){
+    if (start == 1){ // stopwatch incrementing time
       s++;
       if (s >= 60){
         s = 0;
@@ -255,52 +253,51 @@ if (no_of_overflows >= 4){
           h++;
         }
       }
-    } else {
-      if (s > 0 | m > 0 | h > 0){
-        s--;
-        if (s == -1){
-          s = 59;
-          m--;
-          if (m == -1)
-          {
-            m = 59;
-            h--;
-          }
+    } else if (s > 0 | m > 0 | h > 0){ // timer decremnets time 
+      s--;
+      if (s == -1){
+        s = 59;
+        m--;
+        if (m == -1)
+        {
+          m = 59;
+          h--;
         }
-      } else if ((s == 0) & (m == 0) & (h == 0)){
-        start = 0;
-        lcd_gotoxy(11,1);
-        lcd_puts(" stop");
-        GPIO_write_high(&PORTD, PD2);
       }
-      
-    }
-    itoa(h, string, 10);
-    lcd_gotoxy(0,1);
-    if (h <= 9){
-      lcd_puts("0");
-      lcd_puts(string);
-    } else {
-      lcd_puts(string);
-    }
-    lcd_puts(":");
-    itoa(m, string, 10);
-    if (m <= 9){
-      lcd_puts("0");
-      lcd_puts(string);
-    } else {
-      lcd_puts(string);
-    }
-    lcd_puts(":");
-    itoa(s, string, 10);
-    if (s <= 9){
-      lcd_puts("0");
-      lcd_puts(string);
-    } else {
-      lcd_puts(string);
+    } else { // if time is zero stop timer 
+      start = 0;
+      lcd_gotoxy(11,1);
+      lcd_puts(" stop");
+      GPIO_write_high(&PORTD, PD2);
     }
   }
-  if (menu == 2 & ValueY > 900 & ValueX > 400 & ValueX < 600 & start == 0){
+  // code to display current timer to lcd
+  itoa(h, string, 10);
+  lcd_gotoxy(0,1);
+  if (h <= 9){
+    lcd_puts("0");
+    lcd_puts(string);
+  } else {
+    lcd_puts(string);
+  }
+  lcd_puts(":");
+  itoa(m, string, 10);
+  if (m <= 9){
+    lcd_puts("0");
+    lcd_puts(string);
+  } else {
+    lcd_puts(string);
+  }
+  lcd_puts(":");
+  itoa(s, string, 10);
+  if (s <= 9){
+    lcd_puts("0");
+    lcd_puts(string);
+  } else {
+    lcd_puts(string);
+  }
+  }
+  if (menu == 2 & ValueY > 900 & ValueX > 400 & ValueX < 600 & start == 0){ // if joystick is on right cycle timepos to right
     switch (timepos)
     {
     case 0:
@@ -308,13 +305,11 @@ if (no_of_overflows >= 4){
       lcd_gotoxy(13,0);
       lcd_puts("min");
       break;
-    
     case 1:
       timepos = 2;
       lcd_gotoxy(13,0);
       lcd_puts("hod");
       break;
-    
     case 2:
       timepos = 0;
       lcd_gotoxy(13,0);
@@ -322,7 +317,7 @@ if (no_of_overflows >= 4){
       break;
     }
   }
-  if (menu == 2 & ValueY < 200 & ValueX > 400 & ValueX < 600 & start == 0){
+  if (menu == 2 & ValueY < 200 & ValueX > 400 & ValueX < 600 & start == 0){ // if joystick is on left cycle timepos to left
     switch (timepos)
     {
     case 0:
@@ -330,13 +325,11 @@ if (no_of_overflows >= 4){
       lcd_gotoxy(13,0);
       lcd_puts("hod");
       break;
-    
     case 1:
       timepos = 0;
       lcd_gotoxy(13,0);
       lcd_puts("sec");
       break;
-    
     case 2:
       timepos = 1;
       lcd_gotoxy(13,0);
@@ -344,7 +337,7 @@ if (no_of_overflows >= 4){
       break;
     }
   }
-  if (menu == 2 & ValueX > 900 & ValueY > 400 & ValueY < 600 & start == 0){
+  if (menu == 2 & ValueX > 900 & ValueY > 400 & ValueY < 600 & start == 0){ // if joystick is on top increment time depending on timepos 
     switch (timepos)
     {
     case 0:
@@ -388,7 +381,7 @@ if (no_of_overflows >= 4){
       break;
     }
   }
-  if (menu == 2 & ValueX < 200 & ValueY > 400 & ValueY < 600 & start == 0){
+  if (menu == 2 & ValueX < 200 & ValueY > 400 & ValueY < 600 & start == 0){ // if joystick is on bottom decrement time depending on timepos 
     switch (timepos)
     {
     case 0:
@@ -432,44 +425,35 @@ if (no_of_overflows >= 4){
       break;
     }
   }
+
+  if (i == 0){ 
+  ADMUX &= ~((1<<MUX0) | (1<<MUX1) | (1<<MUX2) | (1<<MUX3)); // select input channel A0
+  i = 1;
+  } else {
+  ADMUX &= ~((1<<MUX1) | (1<<MUX2) | (1<<MUX3)); // select input channel A1
+  ADMUX |= (1<<MUX0); // select input channel A1
+  i = 0;
+  }
+  ADCSRA |= (1<<ADSC); // start
 }
 
-if (i == 0){
-ADMUX &= ~((1<<MUX0) | (1<<MUX1) | (1<<MUX2) | (1<<MUX3));
-i = 1;
-} else {
-ADMUX &= ~((1<<MUX1) | (1<<MUX2) | (1<<MUX3));
-ADMUX |= (1<<MUX0);
-i = 0;
-}
-ADCSRA |= (1<<ADSC);
-
-}
 ISR(ADC_vect){
   uint16_t value;
   char string[4]; 
   value = ADC;
-  if (i==1) // X
+  if (i==1) //  i = 1 means we are reading from X axis
   {
-    ValueX = value;
+    ValueX = value; 
 
     itoa(value, string, 10);
     uart_puts(string); 
     uart_puts("   ");
   }
-  else // Y
+  else //  i = 0 means we are reading from Y axis
   {
     ValueY = value;
     itoa(value, string, 10);
     uart_puts(string); 
     uart_puts("\r\n");
   }
-  
-  
-
-  //itoa(i, string, 10);
-  
-  //uart_puts(string);
-
-  
 }
