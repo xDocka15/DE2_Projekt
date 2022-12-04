@@ -234,206 +234,203 @@ ISR(TIMER2_OVF_vect)
 }
 
 ISR(TIMER1_OVF_vect){
-char string[8];
-static uint8_t no_of_overflows = 0;  
+  char string[8];
+  static uint8_t no_of_overflows = 0;  
 
-no_of_overflows++;
-if (no_of_overflows >= 4){
-  no_of_overflows = 0;
-  if (start > 0){
-    if (start == 1){ // stopwatch incrementing time
-        s++;
-        if (s >= 60){
-          s = 0;
+  no_of_overflows++;
+  if (no_of_overflows >= 4){
+    no_of_overflows = 0;
+    if (start > 0){
+      if (start == 1){ // stopwatch incrementing time
+          s++;
+          if (s >= 60){
+            s = 0;
+            m++;
+            if (m >= 60)
+            {
+              m = 0;
+              h++;
+            }
+          }
+        } else if (s > 0 | m > 0 | h > 0){ // timer decrements time 
+          s--;
+          if (s == -1){
+            s = 59;
+            m--;
+            if (m == -1)
+            {
+              m = 59;
+              h--;
+            }
+          }
+        } else { // if time is zero stop timer 
+          start = 0;
+          lcd_gotoxy(11,1);
+          lcd_puts(" stop");
+          GPIO_write_high(&PORTD, PD2);
+        }
+      // code to display current timer to lcd
+      itoa(h, string, 10);
+      lcd_gotoxy(0,1);
+      if (h <= 9){
+        lcd_puts("0");
+        lcd_puts(string);
+      } else {
+        lcd_puts(string);
+      }
+      lcd_puts(":");
+      itoa(m, string, 10);
+      if (m <= 9){
+        lcd_puts("0");
+        lcd_puts(string);
+      } else {
+        lcd_puts(string);
+      }
+      lcd_puts(":");
+      itoa(s, string, 10);
+      if (s <= 9){
+        lcd_puts("0");
+        lcd_puts(string);
+      } else {
+        lcd_puts(string);
+      }
+    }
+    if (menu == 2 & ValueY > 900 & start == 0){ // if joystick is on left cycle timepos to left
+      switch (timepos)
+      {
+      case 0:
+        timepos = 1;
+        lcd_gotoxy(13,0);
+        lcd_puts("min");
+        break;
+      case 1:
+        timepos = 2;
+        lcd_gotoxy(13,0);
+        lcd_puts("hod");
+        break;
+      case 2:
+        timepos = 0;
+        lcd_gotoxy(13,0);
+        lcd_puts("sec");
+        break;
+      }
+    } else if (menu == 2 & ValueY < 200 & start == 0){ // if joystick is on right cycle timepos to right
+      switch (timepos)
+      {
+      case 0:
+        timepos = 2;
+        lcd_gotoxy(13,0);
+        lcd_puts("hod");
+        break;
+      case 1:
+        timepos = 0;
+        lcd_gotoxy(13,0);
+        lcd_puts("sec");
+        break;
+      case 2:
+        timepos = 1;
+        lcd_gotoxy(13,0);
+        lcd_puts("min");
+        break;
+      }
+    } else if (menu == 2 & ValueX > 900 & start == 0){ // if joystick is on top increment time depending on timepos 
+      switch (timepos)
+      {
+      case 0:
+        if (s != 59){
+          s++;
+          itoa(s, string, 10);
+          lcd_gotoxy(6,1);
+          if (s <= 9){
+            lcd_puts("0");
+            lcd_puts(string);
+          } else {
+            lcd_puts(string);
+          }
+        }
+        break;
+      case 1:
+        if (m != 59){
           m++;
-          if (m >= 60)
-          {
-            m = 0;
-            h++;
+          itoa(m, string, 10);
+          lcd_gotoxy(3,1);
+          if (m <= 9){
+            lcd_puts("0");
+            lcd_puts(string);
+          } else {
+            lcd_puts(string);
           }
         }
-      } else if (s > 0 | m > 0 | h > 0){ // timer decrements time 
-        s--;
-        if (s == -1){
-          s = 59;
+        break;
+      case 2:
+        if (h != 59){
+          h++;
+          itoa(h, string, 10);
+          lcd_gotoxy(0,1);
+          if (h <= 9){
+            lcd_puts("0");
+            lcd_puts(string);
+          } else {
+            lcd_puts(string);
+          }
+        }
+        break;
+      }
+    } else if (menu == 2 & ValueX < 200  & start == 0){ // if joystick is on bottom decrement time depending on timepos 
+      switch (timepos)
+      {
+      case 0:
+        if (s != 0){
+          s--;
+          itoa(s, string, 10);
+          lcd_gotoxy(6,1);
+          if (s <= 9){
+            lcd_puts("0");
+            lcd_puts(string);
+          } else {
+            lcd_puts(string);
+          }
+        }
+        break;
+      case 1:
+        if (m != 0){
           m--;
-          if (m == -1)
-          {
-            m = 59;
-            h--;
+          itoa(m, string, 10);
+          lcd_gotoxy(3,1);
+          if (m <= 9){
+            lcd_puts("0");
+            lcd_puts(string);
+          } else {
+            lcd_puts(string);
           }
         }
-      } else { // if time is zero stop timer 
-        start = 0;
-        lcd_gotoxy(11,1);
-        lcd_puts(" stop");
-        GPIO_write_high(&PORTD, PD2);
-      }
-    }
-    // code to display current timer to lcd
-    itoa(h, string, 10);
-    lcd_gotoxy(0,1);
-    if (h <= 9){
-      lcd_puts("0");
-      lcd_puts(string);
-    } else {
-      lcd_puts(string);
-    }
-    lcd_puts(":");
-    itoa(m, string, 10);
-    if (m <= 9){
-      lcd_puts("0");
-      lcd_puts(string);
-    } else {
-      lcd_puts(string);
-    }
-    lcd_puts(":");
-    itoa(s, string, 10);
-    if (s <= 9){
-      lcd_puts("0");
-      lcd_puts(string);
-    } else {
-      lcd_puts(string);
-    }
-  }
-  if (menu == 2 & ValueY > 900 & ValueX > 400 & ValueX < 600 & start == 0){ // if joystick is on left cycle timepos to left
-    switch (timepos)
-    {
-    case 0:
-      timepos = 1;
-      lcd_gotoxy(13,0);
-      lcd_puts("min");
-      break;
-    case 1:
-      timepos = 2;
-      lcd_gotoxy(13,0);
-      lcd_puts("hod");
-      break;
-    case 2:
-      timepos = 0;
-      lcd_gotoxy(13,0);
-      lcd_puts("sec");
-      break;
-    }
-  }
-  if (menu == 2 & ValueY < 200 & ValueX > 400 & ValueX < 600 & start == 0){ // if joystick is on right cycle timepos to right
-    switch (timepos)
-    {
-    case 0:
-      timepos = 2;
-      lcd_gotoxy(13,0);
-      lcd_puts("hod");
-      break;
-    case 1:
-      timepos = 0;
-      lcd_gotoxy(13,0);
-      lcd_puts("sec");
-      break;
-    case 2:
-      timepos = 1;
-      lcd_gotoxy(13,0);
-      lcd_puts("min");
-      break;
-    }
-  }
-  if (menu == 2 & ValueX > 900 & ValueY > 400 & ValueY < 600 & start == 0){ // if joystick is on top increment time depending on timepos 
-    switch (timepos)
-    {
-    case 0:
-      if (s != 59){
-        s++;
-        itoa(s, string, 10);
-        lcd_gotoxy(6,1);
-        if (s <= 9){
-          lcd_puts("0");
-          lcd_puts(string);
-        } else {
-          lcd_puts(string);
+        break;
+      case 2:
+        if (h != 0){
+          h--;
+          itoa(h, string, 10);
+          lcd_gotoxy(0,1);
+          if (h <= 9){
+            lcd_puts("0");
+            lcd_puts(string);
+          } else {
+            lcd_puts(string);
+          }
         }
+        break;
       }
-      break;
-    case 1:
-      if (m != 59){
-        m++;
-        itoa(m, string, 10);
-        lcd_gotoxy(3,1);
-        if (m <= 9){
-          lcd_puts("0");
-          lcd_puts(string);
-        } else {
-          lcd_puts(string);
-        }
-      }
-      break;
-    case 2:
-      if (h != 59){
-        h++;
-        itoa(h, string, 10);
-        lcd_gotoxy(0,1);
-        if (h <= 9){
-          lcd_puts("0");
-          lcd_puts(string);
-        } else {
-          lcd_puts(string);
-        }
-      }
-      break;
     }
-  }
-  if (menu == 2 & ValueX < 200 & ValueY > 400 & ValueY < 600 & start == 0){ // if joystick is on bottom decrement time depending on timepos 
-    switch (timepos)
-    {
-    case 0:
-      if (s != 0){
-        s--;
-        itoa(s, string, 10);
-        lcd_gotoxy(6,1);
-        if (s <= 9){
-          lcd_puts("0");
-          lcd_puts(string);
-        } else {
-          lcd_puts(string);
-        }
-      }
-      break;
-    case 1:
-      if (m != 0){
-        m--;
-        itoa(m, string, 10);
-        lcd_gotoxy(3,1);
-        if (m <= 9){
-          lcd_puts("0");
-          lcd_puts(string);
-        } else {
-          lcd_puts(string);
-        }
-      }
-      break;
-    case 2:
-      if (h != 0){
-        h--;
-        itoa(h, string, 10);
-        lcd_gotoxy(0,1);
-        if (h <= 9){
-          lcd_puts("0");
-          lcd_puts(string);
-        } else {
-          lcd_puts(string);
-        }
-      }
-      break;
-    }
-  }
 
-  if (i == 0){ 
-  ADMUX &= ~((1<<MUX0) | (1<<MUX1) | (1<<MUX2) | (1<<MUX3)); // select input channel A0
-  i = 1;
-  } else {
-  ADMUX &= ~((1<<MUX1) | (1<<MUX2) | (1<<MUX3)); // select input channel A1
-  ADMUX |= (1<<MUX0); // select input channel A1
-  i = 0;
+    if (i == 0){ 
+    ADMUX &= ~((1<<MUX0) | (1<<MUX1) | (1<<MUX2) | (1<<MUX3)); // select input channel A0
+    i = 1;
+    } else {
+    ADMUX &= ~((1<<MUX1) | (1<<MUX2) | (1<<MUX3)); // select input channel A1
+    ADMUX |= (1<<MUX0); // select input channel A1
+    i = 0;
+    }
+    ADCSRA |= (1<<ADSC); // start
   }
-  ADCSRA |= (1<<ADSC); // start
 }
 
 ISR(ADC_vect){
