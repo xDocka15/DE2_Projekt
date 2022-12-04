@@ -1,13 +1,4 @@
 /***********************************************************************
- * 
- * Stopwatch by Timer/Counter2 on the Liquid Crystal Display (LCD)
- *
- * ATmega328P (Arduino Uno), 16 MHz, PlatformIO
- *
- * Copyright (c) 2017 Tomas Fryza
- * Dept. of Radio Electronics, Brno University of Technology, Czechia
- * This work is licensed under the terms of the MIT license.
- * 
  * Components:
  *   16x2 character LCD with parallel interface
  *     VSS  - GND (Power supply ground)
@@ -34,13 +25,6 @@
 #include <stdlib.h>         // C library. Needed for number conversions
 #include <uart.h>
 
-/* Function definitions ----------------------------------------------*/
-/**********************************************************************
- * Function: Main function where the program execution begins
- * Purpose:  Update stopwatch value on LCD screen when 8-bit 
- *           Timer/Counter2 overflows.
- * Returns:  none
- **********************************************************************/
 uint8_t i = 0;  // poiter to which joystick axis we read
 uint16_t ValueX = 0; // value of the axi x
 uint16_t ValueY = 0; // value of the axi y
