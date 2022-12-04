@@ -73,13 +73,14 @@ int main(void)
     GPIO_mode_input_pullup(&DDRB, PB3);
     GPIO_mode_input_pullup(&DDRB, PB4);
     GPIO_mode_input_pullup(&DDRB, PB5);
+    GPIO_mode_output(&DDRD, PD2);
 
 
     
 //
     // Configuration of 8-bit Timer/Counter2 for Stopwatch update
     // Set the overflow prescaler to 16 ms and enable interrupt
-    TIM2_overflow_128us();
+    TIM2_overflow_16us();
     TIM2_overflow_interrupt_enable();
 
     TIM1_overflow_262ms();
@@ -133,7 +134,7 @@ ISR(TIMER2_OVF_vect)
     {
       no_of_overflows = 0;
       astate = GPIO_read(&PINB, PB3);
-      if (astate != alaststate & menu == 0 )
+      if ((astate != alaststate) & (menu == 0))
       {
         if (menu0pos == 0) {
             lcd_gotoxy(0,0);
@@ -199,10 +200,14 @@ ISR(TIMER2_OVF_vect)
         if (start == 0)
         {
           start = 1;
+          lcd_gotoxy(11,1);
+          lcd_puts("start");
         } 
         else
         {
           start = 0;
+          lcd_gotoxy(11,1);
+          lcd_puts(" stop");
         }
         
       }
@@ -211,15 +216,21 @@ ISR(TIMER2_OVF_vect)
         if (start == 0)
         {
           start = 2;
+          lcd_gotoxy(11,1);
+          lcd_puts("start");
+          GPIO_write_low(&PORTD, PD2);
         } 
         else
         {
           start = 0;
+          lcd_gotoxy(11,1);
+          lcd_puts(" stop");
+          GPIO_write_high(&PORTD, PD2);
         }
         
       }
     }
-    while (GPIO_read(&PINB, PB4) == 0){
+    while (GPIO_read(&PINB, PB4) == 0 | GPIO_read(&PINB, PB5) == 0){
     
     }
 }
@@ -245,19 +256,24 @@ if (no_of_overflows >= 4){
         }
       }
     } else {
-      s--;
-      if (s == -1){
-        s = 59;
-        m--;
-        if (m == -1)
-        {
-          m = 59;
-          h--;
+      if (s > 0 | m > 0 | h > 0){
+        s--;
+        if (s == -1){
+          s = 59;
+          m--;
+          if (m == -1)
+          {
+            m = 59;
+            h--;
+          }
         }
-      }
-      if (s == 0 & m == 0 & h == 0){
+      } else if ((s == 0) & (m == 0) & (h == 0)){
         start = 0;
+        lcd_gotoxy(11,1);
+        lcd_puts(" stop");
+        GPIO_write_high(&PORTD, PD2);
       }
+      
     }
     itoa(h, string, 10);
     lcd_gotoxy(0,1);
