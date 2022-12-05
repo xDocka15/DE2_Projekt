@@ -11,7 +11,7 @@ Insert descriptive text and schematic(s) of your implementation.
 
 Stopwatch and alarm clock.
 
-Enables you to choose between stopwatch which counts up to each second up to 100 hours and alarm clock (timer) which lets you set a time after which a LED will turn on.
+Enables you to choose between stopwatch which counts up each second up to 100 hours and alarm clock (timer) which lets you set a time after which a LED will turn on.
 
 ## Software description
 
