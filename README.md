@@ -50,9 +50,10 @@ Put flowchats of your algorithm(s). Write descriptive text of your libraries and
    └── README.md                  // Report of this project
    ```
    
- ![flowchart](images/TIMER1.1_flowchart.png)
+ [flowchart](images/TIMER1.1_flowchart.png)
  ![flowchart](images/TIMER2_flowchart.png)
  ![flowchart](images/VECT_flowchart.png)
+ 
 ## Video
 
 Insert a link to a short video with your practical implementation example (1-3 minutes, e.g. on YouTube).
