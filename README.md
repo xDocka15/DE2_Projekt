@@ -50,9 +50,9 @@ Put flowchats of your algorithm(s). Write descriptive text of your libraries and
    └── README.md                  // Report of this project
    ```
    
- [flowchart](images/TIMER1.1_flowchart.png)
- ![flowchart](images/TIMER2_flowchart.png)
- ![flowchart](images/VECT_flowchart.png)
+ [flowchart of Timer1 interupt](images/TIMER1.1_flowchart.png)
+ [flowchart of Timer2 interrupt](images/TIMER2_flowchart.png)
+ [flowchartof ADC interrupt](images/VECT_flowchart.png)
  
 ## Video
 
