@@ -42,8 +42,8 @@ Put flowchats of your algorithm(s). Write descriptive text of your libraries and
    |   |   ├── lcd.h              //
    |   |   └── lcd_definitions.h  //
    │   └── uart                   //
-   |   |   ├── uart.c             //
-   |   |   └── uart.h             //
+   |       ├── uart.c             //
+   |       └── uart.h             //
    ├── src                        // Source file(s)
    │   └── main.c
    ├── platformio.ini             // Project Configuration File
