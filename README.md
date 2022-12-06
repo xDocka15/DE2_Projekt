@@ -34,16 +34,16 @@ Put flowchats of your algorithm(s). Write descriptive text of your libraries and
    ├── include                    // Included files
    │   └── timer.h                // Timer library for AVR-GCC
    ├── lib                        // Libraries
-   │   ├── GPIO                   //
-   |   |   ├── gpio.c             // library for AVR-GCC
-   |   |   └── gpio.h             // include file for the GPIO GPIO library for AVR-GCC
-   │   ├── lcd                    //
-   |   |   ├── lcd.c              // HD44780U LCD library
-   |   |   ├── lcd.h              // include file for the HD44780U LCD library
-   |   |   └── lcd_definitions.h  // Definitions for Display Size
-   │   └── uart                   //
-   |       ├── uart.c             // Interrupt UART library with receive/transmit circular buffers
-   |       └── uart.h             // Interrupt UART library with receive/transmit circular buffers
+   │   ├── GPIO                   // GPIO library for AVR-GCC
+   |   |   ├── gpio.c             // 
+   |   |   └── gpio.h             // 
+   │   ├── lcd                    // HD44780U LCD library
+   |   |   ├── lcd.c              // 
+   |   |   ├── lcd.h              // 
+   |   |   └── lcd_definitions.h  // 
+   │   └── uart                   // Interrupt UART library with receive/transmit circular buffers
+   |       ├── uart.c             // 
+   |       └── uart.h             // 
    ├── src                        // Source file(s)
    │   └── main.c
    ├── platformio.ini             // Project Configuration File
