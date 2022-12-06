@@ -33,18 +33,15 @@ Put flowchats of your algorithm(s). Write descriptive text of your libraries and
    ```c
    Project                        // PlatfomIO project
    ├── include                    // Included files
-   │   └── timer.h                // Timer library for AVR-GCC
+   │   └── timer.h                // Timer library for AVR-GCC 
    ├── lib                        // Libraries
-   │   ├── GPIO                   // GPIO library for AVR-GCC
-   |   |   ├── gpio.c             // 
-   |   |   └── gpio.h             // 
-   │   ├── lcd                    // HD44780U LCD library
-   |   |   ├── lcd.c              // 
-   |   |   ├── lcd.h              // 
-   |   |   └── lcd_definitions.h  // 
-   │   └── uart                   // Interrupt UART library with receive/transmit circular buffers
-   |       ├── uart.c             // 
-   |       └── uart.h             // 
+   │   ├── GPIO                   // GPIO library for AVR-GCC used for reading/writing digital pins
+   |   |   ├── gpio.c             
+   |   |   └── gpio.h             
+   │   └── lcd                    // HD44780U LCD library used for writing to LCD
+   |       ├── lcd.c              
+   |       ├── lcd.h              
+   |       └── lcd_definitions.h             
    ├── src                        // Source file(s)
    │   └── main.c
    ├── platformio.ini             // Project Configuration File
