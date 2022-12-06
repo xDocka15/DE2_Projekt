@@ -17,7 +17,7 @@ Components used:
 
 Arduino uno
 
-Display ...
+Display HD44780U LCD
 
 Encoder ...
 
@@ -32,18 +32,18 @@ Put flowchats of your algorithm(s). Write descriptive text of your libraries and
    ```c
    Project                        // PlatfomIO project
    ├── include                    // Included files
-   │   └── timer.h                //
+   │   └── timer.h                // Timer library for AVR-GCC
    ├── lib                        // Libraries
    │   ├── GPIO                   //
-   |   |   ├── gpio.c             //
-   |   |   └── gpio.h             //
+   |   |   ├── gpio.c             // library for AVR-GCC
+   |   |   └── gpio.h             // include file for the GPIO GPIO library for AVR-GCC
    │   ├── lcd                    //
-   |   |   ├── lcd.c              //
-   |   |   ├── lcd.h              //
-   |   |   └── lcd_definitions.h  //
+   |   |   ├── lcd.c              // HD44780U LCD library
+   |   |   ├── lcd.h              // include file for the HD44780U LCD library
+   |   |   └── lcd_definitions.h  // Definitions for Display Size
    │   └── uart                   //
-   |       ├── uart.c             //
-   |       └── uart.h             //
+   |       ├── uart.c             // Interrupt UART library with receive/transmit circular buffers
+   |       └── uart.h             // Interrupt UART library with receive/transmit circular buffers
    ├── src                        // Source file(s)
    │   └── main.c
    ├── platformio.ini             // Project Configuration File
