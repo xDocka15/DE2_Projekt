@@ -14,6 +14,7 @@ Stopwatch and alarm clock.
 Enables you to choose between stopwatch which counts up each second up to 100 hours and alarm clock (timer) which lets you set a time after which a LED will turn on.
 
 Components used:
+
 Arduino uno
 
 Display ...
