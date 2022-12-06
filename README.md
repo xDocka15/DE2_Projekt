@@ -28,6 +28,28 @@ Joystick ...
 ## Software description
 
 Put flowchats of your algorithm(s). Write descriptive text of your libraries and source files. Put direct links to these files in `src` or `lib` folders.
+
+   ```c
+   Project                        // PlatfomIO project
+   ├── include                    // Included files
+   │   └── timer.h                //
+   ├── lib                        // Libraries
+   │   ├── GPIO                   //
+   |   |   ├── gpio.c             //
+   |   |   └── gpio.h             //
+   │   ├── lcd                    //
+   |   |   ├── lcd.c              //
+   |   |   ├── lcd.h              //
+   |   |   └── lcd_definitions.h  //
+   │   └── uart                   //
+   |   |   ├── uart.c             //
+   |   |   └── uart.h             //
+   ├── src                        // Source file(s)
+   │   └── main.c
+   ├── platformio.ini             // Project Configuration File
+   └── README.md                  // Report of this project
+   ```
+   
  ![flowchart](images/TIMER1.1_flowchart.png)
  ![flowchart](images/TIMER2_flowchart.png)
  ![flowchart](images/VECT_flowchart.png)
