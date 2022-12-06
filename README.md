@@ -15,6 +15,7 @@ Enables you to choose between stopwatch which counts up each second up to 100 ho
 
 Components used:
 Arduino uno
+
 Display ...
 
 Encoder ...
