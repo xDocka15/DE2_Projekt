@@ -16,8 +16,11 @@ Enables you to choose between stopwatch which counts up each second up to 100 ho
 Components used:
 Arduino uno
 Display ...
+
 Encoder ...
+
 Joystick ...
+
 ## Software description
 
 Put flowchats of your algorithm(s). Write descriptive text of your libraries and source files. Put direct links to these files in `src` or `lib` folders.
