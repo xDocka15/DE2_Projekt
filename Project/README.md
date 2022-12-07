@@ -1,4 +1,4 @@
-# DE2_Projekt
+# DE2_Project
 
 ### Team members
 
