@@ -7,13 +7,13 @@
 
 ## Hardware description
 
-# Stopwatch and alarm clock.
+### Stopwatch and alarm clock.
 
 Enables you to choose between stopwatch which counts up each second up to 100 hours and alarm clock (timer) which lets you set a time period after which a LED will turn on.
 Navigating the menus is done only by the encoder while joystick turns the Stopwatch/Timer on or pauses it, it is also used for setting the time from whitch Timer counts down.
 Turning the encoder switches between Stopwatch and Timer in the main menu pressing it switches to selected mode or backs up to main menu. Pressing the joystick starts/stops Stopwatch or Timer depending on which is selected, when Timer is selected, moving the joystick left or right switches between hours, minutes and seconds and moving it up or down increments or subtracts from selected time interval. 
 
-# Components used:
+### Components used:
 
 Arduino uno
 
