@@ -33,7 +33,7 @@ Joystick HW-504
    ```c
    Project                        // PlatfomIO project
    ├── include                    // Included files
-   │   └── timer.h                // Timer library for AVR-GCC 
+   │   └── timer.h                // Timer library for AVR-GCC includes definitions for Timers/Counters
    ├── lib                        // Libraries
    │   ├── GPIO                   // GPIO library for AVR-GCC used for reading/writing digital pins
    |   |   ├── gpio.c             
