@@ -42,7 +42,7 @@ Joystick HW-504
    |       └── lcd_definitions.h             
    ├── src                        // Source file(s)
    │   └── main.c
-   ├── platformio.ini             // Project Configuration File
+   └── platformio.ini             // Project Configuration File
    README.md                      // Report of this project
    images
    ```
