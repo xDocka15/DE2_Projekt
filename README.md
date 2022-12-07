@@ -58,8 +58,8 @@ Put flowchats of your algorithm(s). Write descriptive text of your libraries and
 ## Video
 
 Insert a link to a short video with your practical implementation example (1-3 minutes, e.g. on YouTube).
-![a](video/video.mov)
-![a](https://user-images.githubusercontent.com/99402754/206269182-13e209bd-6b5b-47b7-9bc2-aaa0024e8cbd.mov)
+
+https://user-images.githubusercontent.com/99402754/206269182-13e209bd-6b5b-47b7-9bc2-aaa0024e8cbd.mov
 ## References
 
 
