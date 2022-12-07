@@ -29,6 +29,7 @@ Joystick HW-504
 
 ## Software description
 
+### Stucture of the project
    ```c
    Project                        // PlatfomIO project
    ├── include                    // Included files
