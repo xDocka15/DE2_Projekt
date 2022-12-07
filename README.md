@@ -49,13 +49,15 @@ Joystick HW-504
    images
    ```
    
-### [flowchart of Timer1 interupt](images/TIMER1.1_flowchart.png)
+ ### Flowcharts
+   
+#### [flowchart of Timer1 interupt](images/TIMER1.1_flowchart.png)
  Responsible for incrementing/decremnting time, setting time for timer, switching between reading form A0 and A1
  
-### [flowchart of Timer2 interrupt](images/TIMER2_flowchart.png)
+#### [flowchart of Timer2 interrupt](images/TIMER2_flowchart.png)
  Responsible for switching between menus and starting/stopping stopwatch/timer
 
-### [flowchart of ADC interrupt](images/VECT_flowchart.png)
+#### [flowchart of ADC interrupt](images/VECT_flowchart.png)
  Responsible for saving adc values to either ValueX or ValueY
  
 ## Video
