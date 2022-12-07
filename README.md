@@ -29,7 +29,7 @@ Joystick HW-504
 
 ## Software description
 
-   ```
+   ```c
    Project                        // PlatfomIO project
    ├── include                    // Included files
    │   └── timer.h                // Timer library for AVR-GCC 
@@ -49,12 +49,13 @@ Joystick HW-504
    ```
    
 ### [flowchart of Timer1 interupt](images/TIMER1.1_flowchart.png)
-Responsible for switching between menus and starting/stopping stopwatch/timer
+ Responsible for incrementing/decremnting time, setting time for timer, switching between reading form A0 and A1
  
 ### [flowchart of Timer2 interrupt](images/TIMER2_flowchart.png)
- 
+ Responsible for switching between menus and starting/stopping stopwatch/timer
+
 ### [flowchart of ADC interrupt](images/VECT_flowchart.png)
- 
+ Responsible for saving adc values to either ValueX or ValueY
  
 ## Video
 
