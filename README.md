@@ -49,6 +49,7 @@ Joystick HW-504
    ```
    
 ### [flowchart of Timer1 interupt](images/TIMER1.1_flowchart.png)
+Responsible for switching between menus and starting/stopping stopwatch/timer
  
 ### [flowchart of Timer2 interrupt](images/TIMER2_flowchart.png)
  
