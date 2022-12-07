@@ -29,7 +29,7 @@ Joystick HW-504
 
 ## Software description
 
-   ```c
+   
    Project                        // PlatfomIO project
    ├── include                    // Included files
    │   └── [timer.h]([Project/include/timer.h](https://github.com/xDocka15/DE2_Projekt/blob/main/Project/include/timer.h))                // Timer library for AVR-GCC 
@@ -46,7 +46,7 @@ Joystick HW-504
    └── platformio.ini             // Project Configuration File
    README.md                      // Report of this project
    images
-   ```
+   
    
 ### [flowchart of Timer1 interupt](images/TIMER1.1_flowchart.png)
 Responsible for switching between menus and starting/stopping stopwatch/timer
