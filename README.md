@@ -23,7 +23,7 @@ Encoder
 
 Joystick HW-504
 
- ![schematic](images/)
+ ![schematic](images/schema.png)
 
 ## Software description
 
