@@ -7,14 +7,13 @@
 
 ## Hardware description
 
-Insert descriptive text and schematic(s) of your implementation.
+# Stopwatch and alarm clock.
 
-Stopwatch and alarm clock.
-
-Enables you to choose between stopwatch which counts up each second up to 100 hours and alarm clock (timer) which lets you set a time after which a LED will turn on.
+Enables you to choose between stopwatch which counts up each second up to 100 hours and alarm clock (timer) which lets you set a time period after which a LED will turn on.
 Navigating the menus is done only by the encoder while joystick turns the Stopwatch/Timer on or pauses it, it is also used for setting the time from whitch Timer counts down.
+Turning the encoder switches between Stopwatch and Timer in the main menu pressing it switches to selected mode or backs up to main menu. Pressing the joystick starts/stops Stopwatch or Timer depending on which is selected, when Timer is selected, moving the joystick left or right switches between hours, minutes and seconds and moving it up or down increments or subtracts from selected time interval. 
 
-Components used:
+# Components used:
 
 Arduino uno
 
@@ -27,8 +26,6 @@ Joystick HW-504
  ![schematic](images/)
 
 ## Software description
-
-Put flowchats of your algorithm(s). Write descriptive text of your libraries and source files. Put direct links to these files in `src` or `lib` folders.
 
    ```c
    Project                        // PlatfomIO project
@@ -57,14 +54,9 @@ Put flowchats of your algorithm(s). Write descriptive text of your libraries and
  
 ## Video
 
-Insert a link to a short video with your practical implementation example (1-3 minutes, e.g. on YouTube).
-
 https://user-images.githubusercontent.com/99402754/206269182-13e209bd-6b5b-47b7-9bc2-aaa0024e8cbd.mov
 ## References
 
 
-
-
-
 1. Inspiration for Encoder code from: https://howtomechatronics.com/tutorials/arduino/rotary-encoder-works-use-arduino/
-2. ...
+2. Needed libraries from https://github.com/tomas-fryza/digital-electronics-2
