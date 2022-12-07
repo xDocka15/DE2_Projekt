@@ -32,7 +32,7 @@ Joystick HW-504
    ```
    Project                        // PlatfomIO project
    ├── include                    // Included files
-   │   └── [timer.h]([Project/include/timer.h](https://github.com/xDocka15/DE2_Projekt/blob/main/Project/include/timer.h))                // Timer library for AVR-GCC 
+   │   └── timer.h                // Timer library for AVR-GCC 
    ├── lib                        // Libraries
    │   ├── GPIO                   // GPIO library for AVR-GCC used for reading/writing digital pins
    |   |   ├── gpio.c             
