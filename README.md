@@ -22,7 +22,7 @@ Display HD44780U LCD
 
 Encoder ...
 
-Joystick ...
+Joystick HW-504
 
  ![schematic](images/)
 

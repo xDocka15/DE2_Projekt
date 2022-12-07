@@ -23,7 +23,7 @@
 #include "timer.h"          // Timer library for AVR-GCC
 #include <lcd.h>            // Peter Fleury's LCD library
 #include <stdlib.h>         // C library. Needed for number conversions
-#include <uart.h>
+
 
 uint8_t i = 0;  // poiter to which joystick axis we read
 uint16_t ValueX = 0; // value of the axi x
@@ -36,35 +36,27 @@ uint8_t timepos = 0; // 0 changing sec, 1 changing min, 2 changing hours,
 uint8_t menu = 0; // indicates what menu we are in
 int main(void)
 {
-
-
-  // Initialize UART to asynchronous, 8N1, 9600
-  uart_init(UART_BAUD_SELECT(9600, F_CPU));
     
-  // int dips and set default menu
+  // init of disp and set default menu
   lcd_init(LCD_DISP_ON);
   lcd_home();
   lcd_puts(">Stopwatch");
   lcd_gotoxy(0,1);
   lcd_puts(" Timer");
 
-    
-//
-// ports
+// init of ports
 
     GPIO_mode_input_pullup(&DDRB, PB2);
     GPIO_mode_input_pullup(&DDRB, PB3);
     GPIO_mode_input_pullup(&DDRB, PB4);
     GPIO_mode_input_pullup(&DDRB, PB5);
     GPIO_mode_output(&DDRD, PD2);
-
-
-    
-// int timers
+   
+// init of timers
 TIM2_overflow_16us();
 TIM2_overflow_interrupt_enable();
 
-TIM1_overflow_262ms();
+TIM1_overflow_33ms();
 TIM1_overflow_interrupt_enable();
 
 
@@ -97,10 +89,7 @@ TIM1_overflow_interrupt_enable();
 
 /* Interrupt service routines ----------------------------------------*/
 /**********************************************************************
- * Function: Timer/Counter2 overflow interrupt
- * Purpose:  Update the stopwatch on LCD screen every sixth overflow,
- *           ie approximately every 100 ms (6 x 16 ms = 100 ms).
- **********************************************************************/
+
 ISR(TIMER2_OVF_vect)
 {
     static uint8_t alaststate = 1;
@@ -111,7 +100,7 @@ ISR(TIMER2_OVF_vect)
   
 
     no_of_overflows++;
-    if (no_of_overflows >= 2)
+    if (no_of_overflows >= 1)
     {
       no_of_overflows = 0;
       // changing pos of ">"
@@ -144,7 +133,6 @@ ISR(TIMER2_OVF_vect)
         lcd_gotoxy(0,1);
         lcd_puts("00:00:00");
 
-        uart_puts("stopw\r\n");
       } 
       // go to timer menu2
       else if (GPIO_read(&PINB, PB4) == 0 & menu == 0 & menu0pos == 1){ 
@@ -156,8 +144,6 @@ ISR(TIMER2_OVF_vect)
         lcd_puts("00:00:00");
         lcd_gotoxy(13,0);
         lcd_puts("sec");
-
-        uart_puts("timer\r\n");
       }
       // return to menu0
       else if (GPIO_read(&PINB, PB4) == 0 & menu >= 1){
@@ -170,9 +156,8 @@ ISR(TIMER2_OVF_vect)
         lcd_puts(">Stopwatch");
         lcd_gotoxy(0,1);
         lcd_puts(" Timer");
-        uart_puts("return\r\n");
 
-        GPIO_write_high(&PORTD, PD2);
+        GPIO_write_low(&PORTD, PD2);
         s = 0;
         m = 0;
         h = 0;
@@ -207,7 +192,7 @@ ISR(TIMER2_OVF_vect)
           start = 0;
           lcd_gotoxy(11,1);
           lcd_puts(" stop");
-          GPIO_write_high(&PORTD, PD2);
+         // GPIO_write_high(&PORTD, PD2);
         }
         
       }
@@ -220,9 +205,10 @@ ISR(TIMER2_OVF_vect)
 ISR(TIMER1_OVF_vect){
   char string[8];
   static uint8_t no_of_overflows = 0;  
+  static uint8_t no_of_overflows2 = 0;  
 
   no_of_overflows++;
-  if (no_of_overflows >= 4){
+  if (no_of_overflows >= 30){
     no_of_overflows = 0;
     if (start > 0){
       if (start == 1){ // stopwatch incrementing time
@@ -279,7 +265,11 @@ ISR(TIMER1_OVF_vect){
         lcd_puts(string);
       }
     }
-    if (menu == 2 & ValueY > 900 & start == 0){ // if joystick is on left cycle timepos to left
+  }
+  no_of_overflows2++;
+  if (no_of_overflows2 >= 6){
+    no_of_overflows2 = 0;
+    if (menu == 2 & ValueY < 200 & start == 0){ // if joystick is on left cycle timepos to left
       switch (timepos)
       {
       case 0:
@@ -298,7 +288,7 @@ ISR(TIMER1_OVF_vect){
         lcd_puts("sec");
         break;
       }
-    } else if (menu == 2 & ValueY < 200 & start == 0){ // if joystick is on right cycle timepos to right
+    } else if (menu == 2 & ValueY > 900 & start == 0){ // if joystick is on right cycle timepos to right
       switch (timepos)
       {
       case 0:
@@ -404,7 +394,7 @@ ISR(TIMER1_OVF_vect){
         break;
       }
     }
-
+  }
     if (i == 0){ 
     ADMUX &= ~((1<<MUX0) | (1<<MUX1) | (1<<MUX2) | (1<<MUX3)); // select input channel A0
     i = 1;
@@ -414,7 +404,7 @@ ISR(TIMER1_OVF_vect){
     i = 0;
     }
     ADCSRA |= (1<<ADSC); // start
-  }
+  
 }
 
 ISR(ADC_vect){
@@ -426,14 +416,12 @@ ISR(ADC_vect){
     ValueX = value; 
 
     itoa(value, string, 10);
-    uart_puts(string); 
-    uart_puts("   ");
+
   }
   else //  i = 0 means we are reading from Y axis
   {
     ValueY = value;
     itoa(value, string, 10);
-    uart_puts(string); 
-    uart_puts("\r\n");
+
   }
 }
