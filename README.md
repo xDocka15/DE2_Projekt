@@ -20,7 +20,7 @@ Arduino uno
 
 Display HD44780U LCD
 
-Encoder ...
+Encoder
 
 Joystick HW-504
 
