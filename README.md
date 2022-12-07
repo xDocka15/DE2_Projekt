@@ -50,7 +50,7 @@ Joystick HW-504
  
 ### [flowchart of Timer2 interrupt](images/TIMER2_flowchart.png)
  
-### [flowchartof ADC interrupt](images/VECT_flowchart.png)
+### [flowchart of ADC interrupt](images/VECT_flowchart.png)
  
  
 ## Video
