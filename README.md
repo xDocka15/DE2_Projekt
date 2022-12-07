@@ -58,7 +58,7 @@ Put flowchats of your algorithm(s). Write descriptive text of your libraries and
 ## Video
 
 Insert a link to a short video with your practical implementation example (1-3 minutes, e.g. on YouTube).
-
+[a](video/video.mov)
 ## References
 
 1. Inspiration for Encoder code from: https://howtomechatronics.com/tutorials/arduino/rotary-encoder-works-use-arduino/
