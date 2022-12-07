@@ -45,7 +45,7 @@ Joystick HW-504
    └── README.md                  // Report of this project
    ```
    
- [flowchart of Timer1 interupt](images/TIMER1.1_flowchart.png)
+### [flowchart of Timer1 interupt](images/TIMER1.1_flowchart.png)
  
  [flowchart of Timer2 interrupt](images/TIMER2_flowchart.png)
  
