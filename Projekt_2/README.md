@@ -15,7 +15,7 @@ Allows you to control two servo motors using a potenciometer and a button. Press
 
 Arduino uno
 
-servo motor
+servo motors
 
 potenciometer
 
