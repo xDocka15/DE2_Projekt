@@ -23,7 +23,7 @@ button
 
 ### Schmeatic
 
- ![schematic](images/schema.png)
+ ![schematic](Images/schema.png)
 
 ## Software description
 
@@ -45,10 +45,10 @@ button
    
  ### Flowcharts
    
-#### [flowchart of Timer0 interupt](images/Flowchart_P2_T0.png)
+#### [flowchart of Timer0 interupt](Images/Flowchart_P2_T0.png)
  Responsible for switching between which servo is being controlled.
  
-#### [flowchart of ADC interrupt](images/Flowchart_P2_ACD.png)
+#### [flowchart of ADC interrupt](Images/Flowchart_P2_ACD.png)
  Responsible for converting analog input into OCR2x value for servomotor
 
  
