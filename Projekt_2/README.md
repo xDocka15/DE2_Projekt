@@ -58,6 +58,5 @@ https://user-images.githubusercontent.com/99402754/208308667-28e10650-6754-463d-
 
 ## References
 
-
-1. Inspiration for Encoder code from: https://howtomechatronics.com/tutorials/arduino/rotary-encoder-works-use-arduino/
-2. Needed libraries from https://github.com/tomas-fryza/digital-electronics-2
+1. Needed libraries from https://github.com/tomas-fryza/digital-electronics-2
+2.
