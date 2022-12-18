@@ -9,15 +9,17 @@
 
 ### Driving servomotors using PWM channels.
 
-
+Allows you to control two servo motors using a potenciometer and a button. Pressing the button changes which motors is being cotrolled, rotating the potenciometer then changes angle of the motor.
 
 ### Components used:
 
 Arduino uno
 
-servo motor
+servo motors
 
-Joystick HW-504
+potenciometer
+
+button
 
 ### Schmeatic
 
@@ -43,7 +45,7 @@ Joystick HW-504
    
  ### Flowcharts
    
-#### [flowchart of Timer1 interupt](images/Flowchart_P2_T0.png)
+#### [flowchart of Timer0 interupt](images/Flowchart_P2_T0.png)
  Responsible for switching between which servo is being controlled.
  
 #### [flowchart of ADC interrupt](images/Flowchart_P2_ACD.png)
