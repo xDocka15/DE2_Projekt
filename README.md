@@ -4,4 +4,4 @@
 
 ## Projekt_1 - Stopwatch and alarm clock
 
-## Projekt_2 - priving servo motors using PWM channels
+## Projekt_2 - driving servo motors using PWM channels
