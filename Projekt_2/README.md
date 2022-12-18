@@ -44,10 +44,10 @@ Joystick HW-504
  ### Flowcharts
    
 #### [flowchart of Timer1 interupt](images/Flowchart_P2_T0.png)
- Responsible for i
+ Responsible for switching between which servo is being controlled.
  
-#### [flowchart of Timer2 interrupt](images/Flowchart_P2_ACD.png)
- Responsible for 
+#### [flowchart of ADC interrupt](images/Flowchart_P2_ACD.png)
+ Responsible for converting analog input into OCR2x value for servomotor
 
  
 ## Video
