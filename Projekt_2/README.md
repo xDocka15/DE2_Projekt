@@ -7,19 +7,15 @@
 
 ## Hardware description
 
-### Stopwatch and alarm clock.
+### Driving servomotors using PWM channels.
 
-Enables you to choose between stopwatch which counts up each second up to 100 hours and alarm clock (timer) which lets you set a time period after which a LED will turn on.
 
-Turning the encoder switches between Stopwatch and Timer in the main menu pressing it switches to selected mode or backs up to main menu. Pressing the joystick starts/stops Stopwatch or Timer depending on which is selected, when Timer is selected, moving the joystick left or right switches between hours, minutes and seconds and moving it up or down increments or subtracts from selected time interval. 
 
 ### Components used:
 
 Arduino uno
 
-Display HD44780U LCD
-
-Encoder
+servo motor
 
 Joystick HW-504
 
