@@ -48,7 +48,7 @@ button
 #### [flowchart of Timer0 interupt](Images/Flowchart_P2_T0.png)
  Responsible for switching between which servo is being controlled.
  
-#### [flowchart of ADC interrupt](Images/Flowchart_P2_ACD.png)
+#### [flowchart of ADC interrupt](Images/Flowchart_P2_ADC.png)
  Responsible for converting analog input into OCR2x value for servomotor
 
  
