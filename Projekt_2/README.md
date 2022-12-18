@@ -9,7 +9,7 @@
 
 ### Driving servo motors using PWM channels.
 
-Allows you to control two servo motors using a potenciometer and a button. Pressing the button changes which motors is being cotrolled, rotating the potenciometer then changes angle of the motor.
+Allows to control two servo motors using a potenciometer and a button. Pressing the button changes which motors is being cotrolled, rotating the potenciometer then changes angle of the motor.
 
 ### Components used:
 
