@@ -2,8 +2,8 @@
 
 ### Team members
 
-* Tomáš Dočkal (Code for Menu, Timer functions, README file)
-* Tran Minh Hieu (Code for Menu, Timer and Stopwatch functions)
+* Tomáš Dočkal (Code for driving servo motor, README file)
+* Tran Minh Hieu (Code for driving servo motor, translating ADC value for servomotor)
 
 ## Hardware description
 
@@ -35,13 +35,9 @@ Joystick HW-504
    ├── include                    // Included files
    │   └── timer.h                // Timer library for AVR-GCC includes definitions for Timers/Counters
    ├── lib                        // Libraries
-   │   ├── GPIO                   // GPIO library for AVR-GCC used for reading/writing digital pins
-   |   |   ├── gpio.c             
-   |   |   └── gpio.h             
-   │   └── lcd                    // HD44780U LCD library used for writing to LCD
-   |       ├── lcd.c              
-   |       ├── lcd.h              
-   |       └── lcd_definitions.h             
+   │   └── GPIO                   // GPIO library for AVR-GCC used for reading/writing digital pins
+   |       ├── gpio.c             
+   |       └── gpio.h                  
    ├── src                        // Source file(s)
    │   └── main.c
    └── platformio.ini             // Project Configuration File
@@ -51,14 +47,12 @@ Joystick HW-504
    
  ### Flowcharts
    
-#### [flowchart of Timer1 interupt](images/TIMER1.1_flowchart.png)
- Responsible for incrementing/decremnting time, setting time for timer, switching between reading form A0 and A1
+#### [flowchart of Timer1 interupt](images/Flowchart_P2_T0.png)
+ Responsible for i
  
-#### [flowchart of Timer2 interrupt](images/TIMER2_flowchart.png)
- Responsible for switching between menus and starting/stopping stopwatch/timer
+#### [flowchart of Timer2 interrupt](images/Flowchart_P2_ACD.png)
+ Responsible for 
 
-#### [flowchart of ADC interrupt](images/VECT_flowchart.png)
- Responsible for saving adc values to either ValueX or ValueY
  
 ## Video
 
