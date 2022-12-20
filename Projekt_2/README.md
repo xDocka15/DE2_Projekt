@@ -59,4 +59,4 @@ https://user-images.githubusercontent.com/99402754/208309075-6bdf6ee2-fbad-4bc1-
 ## References
 
 1. Needed libraries from https://github.com/tomas-fryza/digital-electronics-2
-2.
+2. Function for OCR2A/OCR2B https://deepbluembedded.com/map-function-embedded-c/#:~:text=The%20map%20function%20is%20commonly,certain%20domain%20to%20another%20domain.
